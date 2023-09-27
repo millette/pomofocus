@@ -12,7 +12,9 @@ const insert = db.prepare('INSERT INTO woot (json) VALUES (?)');
 insert.run(JSON.stringify({ a: "b" }))
 
 const fastify = Fastify({
-  logger: true
+  logger: {
+    prettyPrint: true
+  }
 })
 
 // Declare a route
