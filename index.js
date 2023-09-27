@@ -1,6 +1,9 @@
 // npm
 import Fastify from 'fastify'
 import Database from "better-sqlite3"
+import dotenv from "dotenv-safest"
+
+dotenv.config()
 
 const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
@@ -13,7 +16,7 @@ const fastify = Fastify({
 })
 
 // Declare a route
-fastify.post('/Qut23Dynwdr', function (request, reply) {
+fastify.post(process.env.ROUTE, function (request, reply) {
   // fastify.log.info(JSON.stringify(request))
   // fastify.log.info(JSON.stringify(request.body))
   // const a = insert.run(JSON.stringify({ request }))

@@ -8,6 +8,9 @@ dependencies:
   better-sqlite3:
     specifier: ^8.6.0
     version: 8.6.0
+  dotenv-safest:
+    specifier: ^1.1.1
+    version: 1.1.1
   fastify:
     specifier: ^4.23.2
     version: 4.23.2
@@ -162,6 +165,17 @@ packages:
   /detect-libc@2.0.2:
     resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
     engines: {node: '>=8'}
+    dev: false
+
+  /dotenv-safest@1.1.1:
+    resolution: {integrity: sha512-cSCr/62E25o7lPbecR+RbIT0kC9jOtjoCZLnOWCIiuXM/BNSvPfBt9CDfZyGoTLrJHkwY0wdB09Ocl80xp0UHw==}
+    dependencies:
+      dotenv: 16.3.1
+    dev: false
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: false
 
   /end-of-stream@1.4.4:
