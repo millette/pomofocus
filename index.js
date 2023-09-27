@@ -13,11 +13,13 @@ const fastify = Fastify({
 })
 
 // Declare a route
-fastify.post('/', function (request, reply) {
-  fastify.log.info(JSON.stringify(request))
-  fastify.log.info(JSON.stringify(request.body))
-  insert.run(JSON.stringify({ request }))
-  insert.run(JSON.stringify({ body: request.body }))
+fastify.post('/Qut23Dynwdr', function (request, reply) {
+  // fastify.log.info(JSON.stringify(request))
+  // fastify.log.info(JSON.stringify(request.body))
+  const a = insert.run(JSON.stringify({ request }))
+  fastify.log.info(JSON.stringify(a))
+  const b = insert.run(JSON.stringify({ body: request.body }))
+  fastify.log.info(JSON.stringify(b))
   reply.send({ hello: 'world' })
 })
 
