@@ -9,7 +9,7 @@ const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
 const insert = db.prepare('INSERT INTO woot (json) VALUES (?)');
 
-insert.run(JSON.stringify({ a: "b" }))
+// insert.run(JSON.stringify({ a: "b" }))
 
 const fastify = Fastify({
   logger: {
@@ -24,6 +24,8 @@ const fastify = Fastify({
     },
   },
 })
+
+fastify.log.info(process.env.ROUTE)
 
 // Declare a route
 fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
