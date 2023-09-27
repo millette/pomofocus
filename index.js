@@ -13,14 +13,22 @@ insert.run(JSON.stringify({ a: "b" }))
 
 const fastify = Fastify({
   logger: {
-    prettyPrint: true
-  }
+    transport: {
+      target: 'pino-pretty',
+      /*
+      options: {
+        translateTime: 'HH:MM:ss Z',
+        ignore: 'pid,hostname',
+      },
+      */
+    },
+  },
 })
 
 // Declare a route
 fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
   const b = insert.run(JSON.stringify({ body: request.body }))
-  fastify.log.info(JSON.stringify(b))
+  request.log.info(JSON.stringify(b))
   reply.send({ hello: 'world' })
 })
 
