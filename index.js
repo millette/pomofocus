@@ -6,7 +6,7 @@ const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
 const insert = db.prepare('INSERT INTO woot (json) VALUES (?)');
 
-// insert.run(JSON.stringify({a: "b"}))
+insert.run(JSON.stringify({ a: "b" }))
 
 const fastify = Fastify({
   logger: true
