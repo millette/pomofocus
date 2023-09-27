@@ -16,11 +16,7 @@ const fastify = Fastify({
 })
 
 // Declare a route
-fastify.post(process.env.ROUTE, function (request, reply) {
-  // fastify.log.info(JSON.stringify(request))
-  // fastify.log.info(JSON.stringify(request.body))
-  // const a = insert.run(JSON.stringify({ request }))
-  // fastify.log.info(JSON.stringify(a))
+fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
   const b = insert.run(JSON.stringify({ body: request.body }))
   fastify.log.info(JSON.stringify(b))
   reply.send({ hello: 'world' })
