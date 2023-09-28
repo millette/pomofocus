@@ -13,7 +13,7 @@ const fastify = Fastify({ logger: true })
 
 // TODO: handle route in caddy instead
 fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
-  const b = insert.run(JSON.stringify({ body: request.body }))
+  const b = insert.run(JSON.stringify({ body: request.body, headers: request.headers, now: Date.now() }))
   request.log.info(JSON.stringify(b))
   reply.send({ hello: 'world' })
 })
