@@ -7,9 +7,11 @@ dotenv.config()
 
 const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
+
+// TODO: actual column values instead of JSON
 const insert = db.prepare('INSERT INTO woot (json) VALUES (?)');
 
-const fastify = Fastify({ logger: true })
+const fastify = Fastify({ logger: true, trustProxy: process.env.TRUSTIP && [process.env.TRUSTIP] })
 
 // TODO: handle route in caddy instead
 fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
