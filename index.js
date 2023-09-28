@@ -18,7 +18,7 @@ fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
   reply.send({ hello: 'world' })
 })
 
-fastify.listen({ port: 3123 }, function (err) {
+fastify.listen({ port: process.env.PORT || 3123 }, function (err) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
