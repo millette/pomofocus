@@ -5,22 +5,29 @@ import dotenv from "dotenv-safest"
 
 dotenv.config()
 
+const fastify = Fastify({
+  logger: true,
+  trustProxy: process.env.TRUSTIP || false,
+  bodyLimit: 10 * 1024,
+})
+
 const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
 
-// TODO: actual column values instead of JSON
-const insert = db.prepare('INSERT INTO woot (json) VALUES (?)');
+db.exec('create table punchevent if not exists (id integer primary key, now integer not null, source text default "pomofocus", body json not null, headers json not null, createdAt timestamp default current_timestamp, check (json_valid(body) == 1), check (json_valid(headers) == 1))')
 
-const fastify = Fastify({ logger: true, trustProxy: process.env.TRUSTIP && [process.env.TRUSTIP] })
+const insert = db.prepare('INSERT INTO punchevent (body, headers, now) VALUES (json(?), json(?), ?)');
 
-// TODO: handle route in caddy instead
-fastify.post(`/${process.env.ROUTE}`, function (request, reply) {
-  const b = insert.run(JSON.stringify({ body: request.body, headers: request.headers, now: Date.now() }))
-  request.log.info(JSON.stringify(b))
-  reply.send({ hello: 'world' })
+fastify.post('/', function (request, reply) {
+  const body = JSON.stringify(request.body)
+  const headers = JSON.stringify(request.headers)
+  const now = Date.now()
+  const b = insert.run(body, headers, now)  
+  request.log.error(JSON.stringify(b))
+  reply.send({ ok: true, now })
 })
 
-fastify.listen({ port: process.env.PORT || 3123 }, function (err) {
+fastify.listen({ port: process.env.PORT }, function (err) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
