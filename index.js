@@ -14,7 +14,7 @@ const fastify = Fastify({
 const db = new Database("woot.db")
 db.pragma('journal_mode = WAL')
 
-db.exec('create table punchevent if not exists (id integer primary key, now integer not null, source text default "pomofocus", body json not null, headers json not null, createdAt timestamp default current_timestamp, check (json_valid(body) == 1), check (json_valid(headers) == 1))')
+db.exec('create table if not exists punchevent (id integer primary key, now integer not null, source text default "pomofocus", body json not null, headers json not null, createdAt timestamp default current_timestamp, check (json_valid(body) == 1), check (json_valid(headers) == 1))')
 
 const insert = db.prepare('INSERT INTO punchevent (body, headers, now) VALUES (json(?), json(?), ?)');
 
