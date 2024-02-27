@@ -1,9 +1,9 @@
 // npm
 import Fastify from 'fastify'
 import Database from "better-sqlite3"
-// import dotenv from "dotenv-safest"
+import dotenv from "dotenv-safest"
 
-// dotenv.config()
+dotenv.config()
 
 const fastify = Fastify({
   logger: true,
@@ -44,7 +44,7 @@ fastify.post('/', function (request, reply) {
   const body = JSON.stringify(request.body)
   const headers = JSON.stringify(request.headers)
   const now = Date.now()
-  const b = insert.run(body, headers, now)  
+  const b = insert.run(body, headers, now)
   request.log.error(JSON.stringify(b))
   reply.send({ ok: true, now })
 })
