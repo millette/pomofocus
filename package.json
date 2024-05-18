@@ -10,6 +10,6 @@
   "dependencies": {
     "better-sqlite3": "^9.4.3",
     "dotenv-safest": "^1.1.1",
-    "fastify": "^4.26.2"
+    "fastify": "^4.27.0"
   }
 }
