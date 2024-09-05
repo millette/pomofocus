@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "echo Nothing to build.",
+    "check": "echo 'check - noop, continue.'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "better-sqlite3": "^10.0.0",
     "dotenv-safest": "^1.1.1",
-    "fastify": "^4.27.0"
+    "fastify": "^4.28.1"
   }
 }
